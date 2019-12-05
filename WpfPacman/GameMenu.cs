@@ -109,13 +109,13 @@ namespace WpfProject
             Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4);
             canv.Children.Add(menuTextBlock2);
         }
-        bool runselectitem = true;
+        bool runSelectItem = true;
         public async void SelectMenuItem(Canvas canv, KeyEventArgs e)
         {
-            if(runselectitem)
+            if(runSelectItem)
             {
                 canv.Children.Clear();
-                runselectitem = false;
+                runSelectItem = false;
                 switch (e.Key)
                 {
                     case Key.S:
@@ -170,7 +170,7 @@ namespace WpfProject
 
 
             }
-            runselectitem = true;
+            runSelectItem = true;
         }
         public int GetArrowPosition()
         {
