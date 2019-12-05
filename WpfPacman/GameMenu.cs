@@ -16,20 +16,32 @@ namespace WpfProject
     public class GameMenu
     {
         String[] menuText;
-        TextBlock menuTextBlock0=new TextBlock();
+
+        TextBlock menuTextBlock0 = new TextBlock();
         TextBlock menuTextBlock1 = new TextBlock();
         TextBlock menuTextBlock2 = new TextBlock();
-        Polygon [] arrow = new Polygon[2];
-        Point [] Point1 = new Point[6];
-        PointCollection [] myPointCollection = new PointCollection[2];
+        List<TextBlock> menuItems = new List<TextBlock>();
+
+        Polygon[] arrow = new Polygon[2];
+        Point[] Point1 = new Point[6];
+        PointCollection[] myPointCollection = new PointCollection[2];
         int arrowPosition = 1;
-        
+        bool runSelectItem = true;
+
         public GameMenu()
         {
-            menuText = new String[4];
+            menuText = new String[3];
             menuText[0] = "Start";
             menuText[1] = "Map editor";
             menuText[2] = "Exit";
+
+            for (var i = 0; i < menuText.Length; i++)
+            {
+                var textBlock = new TextBlock();
+                textBlock.Text = menuText[i];
+                menuItems.Add(textBlock);
+            }
+
             for (int i = 0; i < 2; i++)
             {
                 arrow[i] = new Polygon();
@@ -40,15 +52,16 @@ namespace WpfProject
         public void SetPointArrow(double x, double y)
         {
             Point1[0] = new Point(x, y);
-            Point1[1] = new Point(x+40, y+20);
-            Point1[2] = new Point(x-20, y+20);
+            Point1[1] = new Point(x + 40, y + 20);
+            Point1[2] = new Point(x - 20, y + 20);
+
             myPointCollection[0].Clear();
             myPointCollection[0].Add(Point1[0]);
             myPointCollection[0].Add(Point1[1]);
             myPointCollection[0].Add(Point1[2]);
 
-            Point1[3] = new Point(x, y+40);
-           
+            Point1[3] = new Point(x, y + 40);
+
             myPointCollection[1].Clear();
             myPointCollection[1].Add(Point1[1]);
             myPointCollection[1].Add(Point1[2]);
@@ -56,66 +69,47 @@ namespace WpfProject
         }
         public void DrawMenu(Canvas canv)
         {
-
-            menuTextBlock0.Text = menuText[0];
-            menuTextBlock0.FontSize = canv.ActualHeight/8;
-            Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 +40);
-            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4*3);
-            canv.Children.Add(menuTextBlock0);
-           
-            menuTextBlock1.Text = menuText[1];
-            menuTextBlock1.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock1, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4*2);
-            canv.Children.Add(menuTextBlock1);
-
-            menuTextBlock2.Text = menuText[2];
-            menuTextBlock2.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock2, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4);
-            canv.Children.Add(menuTextBlock2);
-
+            for (var i = 0; i < menuItems.Count; i++)
+            {
+                menuItems[i].FontSize = canv.ActualHeight / 8;
+                Canvas.SetLeft(menuItems[i], canv.ActualWidth / 2 + 40);
+                Canvas.SetTop(menuItems[i], canv.ActualHeight - canv.ActualHeight / 4 * (menuItems.Count - i));
+                canv.Children.Add(menuItems[i]);
+            }
         }
         public void DrawArrow(Canvas canv)
         {
-            
+
             SolidColorBrush mySolidColorBrush = new SolidColorBrush();
             mySolidColorBrush.Color = Color.FromRgb(255, 80, 80);
             arrow[0].Fill = mySolidColorBrush;
             arrow[0].Points = myPointCollection[0];
+
             SolidColorBrush mySolidColorBrush2 = new SolidColorBrush();
             mySolidColorBrush2.Color = Color.FromRgb(200, 0, 0);
             arrow[1].Fill = mySolidColorBrush2;
             arrow[1].Points = myPointCollection[1];
-            SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / (4 * arrowPosition)));        
+
+            SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / (4 * arrowPosition)));
             canv.Children.Add(arrow[0]);
             canv.Children.Add(arrow[1]);
         }
-        public void firstPositionMenuItem(Canvas canv)
+        public void InitializeMenuItems(Canvas canv)
         {
-            menuTextBlock0.Text = menuText[0];
-            menuTextBlock0.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3-40);
-            canv.Children.Add(menuTextBlock0);
-            menuTextBlock1.Text = menuText[1];
-            menuTextBlock1.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock1, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4 * 2);
-            canv.Children.Add(menuTextBlock1);
-            menuTextBlock2.Text = menuText[2];
-            menuTextBlock2.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock2, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4);
-            canv.Children.Add(menuTextBlock2);
+            for (var i = 0; i < menuItems.Count; i++)
+            {
+                menuItems[i].FontSize = canv.ActualHeight / 8;
+                Canvas.SetLeft(menuItems[i], canv.ActualWidth / 2 + 40);
+                Canvas.SetTop(menuItems[i], canv.ActualHeight - canv.ActualHeight / 4 * (menuItems.Count - i) - (i == 0 ? 40 : 0));
+                canv.Children.Add(menuItems[i]);
+            }
         }
-        bool runselectitem = true;
         public async void SelectMenuItem(Canvas canv, KeyEventArgs e)
         {
-            if(runselectitem)
+            if (runSelectItem)
             {
                 canv.Children.Clear();
-                runselectitem = false;
+                runSelectItem = false;
                 switch (e.Key)
                 {
                     case Key.S:
@@ -137,7 +131,7 @@ namespace WpfProject
                         DrawMenu(canv);
                         for (int i = 0; i <= 40; i += 5)
                         {
-                            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3 - i);
+                            Canvas.SetTop(menuItems[0], canv.ActualHeight - canv.ActualHeight / 4 * 3 - i);
                             await Task.Delay(1);
                         }
                         break;
@@ -146,7 +140,7 @@ namespace WpfProject
                         DrawMenu(canv);
                         for (int i = 0; i <= 40; i += 5)
                         {
-                            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4 * 2 - i);
+                            Canvas.SetTop(menuItems[1], canv.ActualHeight - canv.ActualHeight / 4 * 2 - i);
                             await Task.Delay(1);
                         }
                         break;
@@ -155,7 +149,7 @@ namespace WpfProject
                         DrawMenu(canv);
                         for (int i = 0; i <= 40; i += 5)
                         {
-                            Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4 - i);
+                            Canvas.SetTop(menuItems[2], canv.ActualHeight - canv.ActualHeight / 4 - i);
                             await Task.Delay(1);
                         }
                         break;
@@ -164,19 +158,16 @@ namespace WpfProject
                 canv.Children.Remove(arrow[0]);
                 SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / 4 * arrowPosition));
                 canv.Children.Add(arrow[0]);
+
                 canv.Children.Remove(arrow[1]);
                 SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / 4 * arrowPosition));
                 canv.Children.Add(arrow[1]);
-
-
             }
-            runselectitem = true;
+            runSelectItem = true;
         }
-        public int ReturnArrowPosition()
+        public int GetArrowPosition()
         {
             return arrowPosition;
         }
-
-        ~GameMenu() { }
     }
 }
