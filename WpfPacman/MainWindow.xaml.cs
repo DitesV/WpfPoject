@@ -21,6 +21,7 @@ namespace WpfProject
     public partial class MainWindow : Window
     {
         GameMenu gameMenu = new GameMenu();
+        bool startGame;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +34,6 @@ namespace WpfProject
             gameMenu.DrawArrow(canv);
 
         }
-        bool startGame;
 
         private async void Window_KeyDown(object sender, KeyEventArgs e)
         {

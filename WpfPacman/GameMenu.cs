@@ -20,6 +20,7 @@ namespace WpfProject
         TextBlock menuTextBlock0 = new TextBlock();
         TextBlock menuTextBlock1 = new TextBlock();
         TextBlock menuTextBlock2 = new TextBlock();
+        List<TextBlock> menuItems = new List<TextBlock>();
 
         Polygon[] arrow = new Polygon[2];
         Point[] Point1 = new Point[6];
@@ -29,10 +30,18 @@ namespace WpfProject
 
         public GameMenu()
         {
-            menuText = new String[4];
+            menuText = new String[3];
             menuText[0] = "Start";
             menuText[1] = "Map editor";
             menuText[2] = "Exit";
+
+            for (var i = 0; i < menuText.Length; i++)
+            {
+                var textBlock = new TextBlock();
+                textBlock.Text = menuText[i];
+                menuItems.Add(textBlock);
+            }
+            
             for (int i = 0; i < 2; i++)
             {
                 arrow[i] = new Polygon();
@@ -60,25 +69,13 @@ namespace WpfProject
         }
         public void DrawMenu(Canvas canv)
         {
-
-            menuTextBlock0.Text = menuText[0];
-            menuTextBlock0.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3);
-            canv.Children.Add(menuTextBlock0);
-
-            menuTextBlock1.Text = menuText[1];
-            menuTextBlock1.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock1, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4 * 2);
-            canv.Children.Add(menuTextBlock1);
-
-            menuTextBlock2.Text = menuText[2];
-            menuTextBlock2.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock2, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4);
-            canv.Children.Add(menuTextBlock2);
-
+            for (var i = 0; i < menuItems.Count; i++)
+            {
+                menuItems[i].FontSize = canv.ActualHeight / 8;
+                Canvas.SetLeft(menuItems[i], canv.ActualWidth / 2 + 40);
+                Canvas.SetTop(menuItems[i], canv.ActualHeight - canv.ActualHeight / 4 * (menuItems.Count - i));
+                canv.Children.Add(menuItems[i]);
+            }
         }
         public void DrawArrow(Canvas canv)
         {
@@ -99,23 +96,13 @@ namespace WpfProject
         }
         public void InitializeMenuItems(Canvas canv)
         {
-            menuTextBlock0.Text = menuText[0];
-            menuTextBlock0.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3 - 40);
-            canv.Children.Add(menuTextBlock0);
-
-            menuTextBlock1.Text = menuText[1];
-            menuTextBlock1.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock1, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4 * 2);
-            canv.Children.Add(menuTextBlock1);
-
-            menuTextBlock2.Text = menuText[2];
-            menuTextBlock2.FontSize = canv.ActualHeight / 8;
-            Canvas.SetLeft(menuTextBlock2, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4);
-            canv.Children.Add(menuTextBlock2);
+            for (var i = 0; i < menuItems.Count; i++)
+            {
+                menuItems[i].FontSize = canv.ActualHeight / 8;
+                Canvas.SetLeft(menuItems[i], canv.ActualWidth / 2 + 40);
+                Canvas.SetTop(menuItems[i], canv.ActualHeight - canv.ActualHeight / 4 * (menuItems.Count - i) - (i == 0 ? 40 : 0));
+                canv.Children.Add(menuItems[i]);
+            }
         }
         public async void SelectMenuItem(Canvas canv, KeyEventArgs e)
         {
@@ -144,7 +131,7 @@ namespace WpfProject
                         DrawMenu(canv);
                         for (int i = 0; i <= 40; i += 5)
                         {
-                            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3 - i);
+                            Canvas.SetTop(menuItems[0], canv.ActualHeight - canv.ActualHeight / 4 * 3 - i);
                             await Task.Delay(1);
                         }
                         break;
@@ -153,7 +140,7 @@ namespace WpfProject
                         DrawMenu(canv);
                         for (int i = 0; i <= 40; i += 5)
                         {
-                            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4 * 2 - i);
+                            Canvas.SetTop(menuItems[1], canv.ActualHeight - canv.ActualHeight / 4 * 2 - i);
                             await Task.Delay(1);
                         }
                         break;
@@ -162,7 +149,7 @@ namespace WpfProject
                         DrawMenu(canv);
                         for (int i = 0; i <= 40; i += 5)
                         {
-                            Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4 - i);
+                            Canvas.SetTop(menuItems[2], canv.ActualHeight - canv.ActualHeight / 4 - i);
                             await Task.Delay(1);
                         }
                         break;
