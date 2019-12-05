@@ -16,14 +16,14 @@ namespace WpfProject
     public class GameMenu
     {
         String[] menuText;
-        TextBlock menuTextBlock0=new TextBlock();
+        TextBlock menuTextBlock0 = new TextBlock();
         TextBlock menuTextBlock1 = new TextBlock();
         TextBlock menuTextBlock2 = new TextBlock();
-        Polygon [] arrow = new Polygon[2];
-        Point [] Point1 = new Point[6];
-        PointCollection [] myPointCollection = new PointCollection[2];
+        Polygon[] arrow = new Polygon[2];
+        Point[] Point1 = new Point[6];
+        PointCollection[] myPointCollection = new PointCollection[2];
         int arrowPosition = 1;
-        
+
         public GameMenu()
         {
             menuText = new String[4];
@@ -40,15 +40,15 @@ namespace WpfProject
         public void SetPointArrow(double x, double y)
         {
             Point1[0] = new Point(x, y);
-            Point1[1] = new Point(x+40, y+20);
-            Point1[2] = new Point(x-20, y+20);
+            Point1[1] = new Point(x + 40, y + 20);
+            Point1[2] = new Point(x - 20, y + 20);
             myPointCollection[0].Clear();
             myPointCollection[0].Add(Point1[0]);
             myPointCollection[0].Add(Point1[1]);
             myPointCollection[0].Add(Point1[2]);
 
-            Point1[3] = new Point(x, y+40);
-           
+            Point1[3] = new Point(x, y + 40);
+
             myPointCollection[1].Clear();
             myPointCollection[1].Add(Point1[1]);
             myPointCollection[1].Add(Point1[2]);
@@ -58,15 +58,15 @@ namespace WpfProject
         {
 
             menuTextBlock0.Text = menuText[0];
-            menuTextBlock0.FontSize = canv.ActualHeight/8;
-            Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 +40);
-            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4*3);
+            menuTextBlock0.FontSize = canv.ActualHeight / 8;
+            Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 + 40);
+            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3);
             canv.Children.Add(menuTextBlock0);
-           
+
             menuTextBlock1.Text = menuText[1];
             menuTextBlock1.FontSize = canv.ActualHeight / 8;
             Canvas.SetLeft(menuTextBlock1, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4*2);
+            Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4 * 2);
             canv.Children.Add(menuTextBlock1);
 
             menuTextBlock2.Text = menuText[2];
@@ -78,7 +78,7 @@ namespace WpfProject
         }
         public void DrawArrow(Canvas canv)
         {
-            
+
             SolidColorBrush mySolidColorBrush = new SolidColorBrush();
             mySolidColorBrush.Color = Color.FromRgb(255, 80, 80);
             arrow[0].Fill = mySolidColorBrush;
@@ -87,7 +87,7 @@ namespace WpfProject
             mySolidColorBrush2.Color = Color.FromRgb(200, 0, 0);
             arrow[1].Fill = mySolidColorBrush2;
             arrow[1].Points = myPointCollection[1];
-            SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / (4 * arrowPosition)));        
+            SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / (4 * arrowPosition)));
             canv.Children.Add(arrow[0]);
             canv.Children.Add(arrow[1]);
         }
@@ -96,7 +96,7 @@ namespace WpfProject
             menuTextBlock0.Text = menuText[0];
             menuTextBlock0.FontSize = canv.ActualHeight / 8;
             Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 + 40);
-            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3-40);
+            Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3 - 40);
             canv.Children.Add(menuTextBlock0);
             menuTextBlock1.Text = menuText[1];
             menuTextBlock1.FontSize = canv.ActualHeight / 8;
@@ -112,7 +112,7 @@ namespace WpfProject
         bool runSelectItem = true;
         public async void SelectMenuItem(Canvas canv, KeyEventArgs e)
         {
-            if(runSelectItem)
+            if (runSelectItem)
             {
                 canv.Children.Clear();
                 runSelectItem = false;

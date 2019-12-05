@@ -20,7 +20,7 @@ namespace WpfProject
     /// </summary>
     public partial class MainWindow : Window
     {
-            GameMenu gameMenu=new GameMenu();
+        GameMenu gameMenu = new GameMenu();
         public MainWindow()
         {
             InitializeComponent();
@@ -29,12 +29,12 @@ namespace WpfProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             gameMenu.firstPositionMenuItem(canv);
-           // gameMenu.DrawMenu(canv);
+            // gameMenu.DrawMenu(canv);
             gameMenu.DrawArrow(canv);
-           
+
         }
         bool startGame;
-       
+
         private async void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (!startGame)
@@ -47,9 +47,9 @@ namespace WpfProject
                             canv.Children.Clear();
                             startGame = true;
                             Viewport3D viewport = new Viewport3D();
-                            
+
                             TextBlock menuTextBlock0 = new TextBlock();
-                            menuTextBlock0.Text = "В разработке";         
+                            menuTextBlock0.Text = "В разработке";
                             menuTextBlock0.FontSize = canv.ActualHeight / 5;
                             Canvas.SetLeft(menuTextBlock0, 20);
                             Canvas.SetTop(menuTextBlock0, 20);
@@ -90,7 +90,7 @@ namespace WpfProject
 
         private async void Window_KeyUp(object sender, KeyEventArgs e)
         {
-           
+
         }
     }
 }
