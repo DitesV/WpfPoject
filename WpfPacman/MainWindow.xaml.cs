@@ -41,7 +41,7 @@ namespace WpfProject
             {
                 if (e.Key == Key.Enter)
                 {
-                    switch (gameMenu.ReturnArrowPosition())
+                    switch (gameMenu.GetArrowPosition())
                     {
                         case 1:
                             canv.Children.Clear();

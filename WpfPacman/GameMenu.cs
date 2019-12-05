@@ -172,7 +172,7 @@ namespace WpfProject
             }
             runselectitem = true;
         }
-        public int ReturnArrowPosition()
+        public int GetArrowPosition()
         {
             return arrowPosition;
         }
