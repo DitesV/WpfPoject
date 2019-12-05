@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,7 @@ namespace WpfProject
         Point[] Point1 = new Point[6];
         PointCollection[] myPointCollection = new PointCollection[2];
         int arrowPosition = 1;
+        bool runSelectItem = true;
 
         public GameMenu()
         {
@@ -109,7 +110,6 @@ namespace WpfProject
             Canvas.SetTop(menuTextBlock2, canv.ActualHeight - canv.ActualHeight / 4);
             canv.Children.Add(menuTextBlock2);
         }
-        bool runSelectItem = true;
         public async void SelectMenuItem(Canvas canv, KeyEventArgs e)
         {
             if (runSelectItem)
