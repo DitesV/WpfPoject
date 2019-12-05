@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +16,11 @@ namespace WpfProject
     public class GameMenu
     {
         String[] menuText;
+
         TextBlock menuTextBlock0 = new TextBlock();
         TextBlock menuTextBlock1 = new TextBlock();
         TextBlock menuTextBlock2 = new TextBlock();
+
         Polygon[] arrow = new Polygon[2];
         Point[] Point1 = new Point[6];
         PointCollection[] myPointCollection = new PointCollection[2];
@@ -43,6 +45,7 @@ namespace WpfProject
             Point1[0] = new Point(x, y);
             Point1[1] = new Point(x + 40, y + 20);
             Point1[2] = new Point(x - 20, y + 20);
+
             myPointCollection[0].Clear();
             myPointCollection[0].Add(Point1[0]);
             myPointCollection[0].Add(Point1[1]);
@@ -84,10 +87,12 @@ namespace WpfProject
             mySolidColorBrush.Color = Color.FromRgb(255, 80, 80);
             arrow[0].Fill = mySolidColorBrush;
             arrow[0].Points = myPointCollection[0];
+
             SolidColorBrush mySolidColorBrush2 = new SolidColorBrush();
             mySolidColorBrush2.Color = Color.FromRgb(200, 0, 0);
             arrow[1].Fill = mySolidColorBrush2;
             arrow[1].Points = myPointCollection[1];
+
             SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / (4 * arrowPosition)));
             canv.Children.Add(arrow[0]);
             canv.Children.Add(arrow[1]);
@@ -99,11 +104,13 @@ namespace WpfProject
             Canvas.SetLeft(menuTextBlock0, canv.ActualWidth / 2 + 40);
             Canvas.SetTop(menuTextBlock0, canv.ActualHeight - canv.ActualHeight / 4 * 3 - 40);
             canv.Children.Add(menuTextBlock0);
+
             menuTextBlock1.Text = menuText[1];
             menuTextBlock1.FontSize = canv.ActualHeight / 8;
             Canvas.SetLeft(menuTextBlock1, canv.ActualWidth / 2 + 40);
             Canvas.SetTop(menuTextBlock1, canv.ActualHeight - canv.ActualHeight / 4 * 2);
             canv.Children.Add(menuTextBlock1);
+
             menuTextBlock2.Text = menuText[2];
             menuTextBlock2.FontSize = canv.ActualHeight / 8;
             Canvas.SetLeft(menuTextBlock2, canv.ActualWidth / 2 + 40);
@@ -164,11 +171,10 @@ namespace WpfProject
                 canv.Children.Remove(arrow[0]);
                 SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / 4 * arrowPosition));
                 canv.Children.Add(arrow[0]);
+
                 canv.Children.Remove(arrow[1]);
                 SetPointArrow((canv.ActualWidth / 2), (canv.ActualHeight / 4 * arrowPosition));
                 canv.Children.Add(arrow[1]);
-
-
             }
             runSelectItem = true;
         }
