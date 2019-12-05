@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +28,7 @@ namespace WpfProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            gameMenu.firstPositionMenuItem(canv);
+            gameMenu.InitializeMenuItems(canv);
             // gameMenu.DrawMenu(canv);
             gameMenu.DrawArrow(canv);
 

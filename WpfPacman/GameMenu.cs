@@ -92,7 +92,7 @@ namespace WpfProject
             canv.Children.Add(arrow[0]);
             canv.Children.Add(arrow[1]);
         }
-        public void firstPositionMenuItem(Canvas canv)
+        public void InitializeMenuItems(Canvas canv)
         {
             menuTextBlock0.Text = menuText[0];
             menuTextBlock0.FontSize = canv.ActualHeight / 8;
